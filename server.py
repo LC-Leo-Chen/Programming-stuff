@@ -10,7 +10,9 @@ server.listen(5)
 users_online=0
 print('you might want to check your firewall settings and other\npossible problems and fix them')
 print('server starts')
-msg=[]
+file=open('msgs.txt','a+')
+file=open('msgs.txt','r')
+msg=file.readlines()
 users=[]
 def stuff(users,client):
     try:
@@ -29,6 +31,9 @@ def handle(client,addr):
             if cmsg!='':
                 time=t.strftime('%Y/%m/%d %H:%M:%S',t.localtime())
                 msg.append('<'+addr[0]+'>'+': '+cmsg+'\n\n'+time+'\n\n')
+                file=open('msgs.txt','a+')
+                file.write('<'+addr[0]+'>'+': '+cmsg+'\n\n'+time+'\n\n')
+                file.close()
                 for j in users:
                     j.send(('<'+addr[0]+'>'+': '+cmsg+'\n\n'+time+'\n\n').encode())
     except Exception as e:
