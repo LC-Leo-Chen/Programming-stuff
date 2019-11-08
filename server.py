@@ -2,7 +2,8 @@
 import socket,_thread,time as t
 n=socket.gethostname()
 host=socket.gethostbyname(n)
-print('server: '+host)
+print('server ip: '+host)
+print('server name: '+n)
 port=int(input('enter port: '))
 server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server.bind((host,port))
